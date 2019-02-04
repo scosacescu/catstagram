@@ -17,14 +17,14 @@ import Likes from '../components/Likes';
 class FeedItem extends React.Component{
 
 	render(){
-		const {title, url, likes, usersLiked} = this.props;
+		const {title, url, likes, userLiked} = this.props;
 		//console.log(likes);
 		
 		return(
 			<div className="FeedItem">
 				<h1>{title}</h1>
 				<img src={url}/>
-				<Likes likes={likes}/> 
+				<Likes likes={likes} userLiked={userLiked}/> 
 			</div>
 		)
 	}

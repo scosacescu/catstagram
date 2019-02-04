@@ -45,10 +45,35 @@ import React from 'react';
     // export default the component!
     
     class ImageUploaderForm extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {
+                url:"",
+                name:""
+            }
+        }
+
+        handleChange = event => {
+            this.setState({
+              [event.target.name]: event.target.value
+            });
+        };
+        
+        handleSubmit = event => {
+            event.preventDefault();
+            this.props.handleAddPhoto(this.state.url, this.state.name);
+            console.log(this.state.url);
+
+            //need to set input to empty
+        };
+
+
         render(){
             return(
-                <form className="ImageUploaderForm">
-                    <input type="button"></input>
+                <form className="ImageUploaderForm" onSubmit={this.handleSubmit}>
+                    <input type="text" name="url" placeholder="Provide a photo url here" onChange={this.handleChange}></input>
+                    <input type="text" name="name" placeholder="Add a caption..." onChange={this.handleChange}></input>
+                    <button type="submit">Upload an Image</button>
                 </form>
             )
         }

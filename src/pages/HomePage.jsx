@@ -21,14 +21,47 @@ import ImageUploaderForm from '../components/ImageUploaderForm';
 import FeedList from '../components/FeedList';
 
 class HomePage extends React.Component{
+	state = {
+		photos: data.photos
+	}
+	
+	// {
+	// 	"id": 9,
+	// 	"title": "I'm the king",
+	// 	"url": "http://i.imgur.com/E2wNiC6.gif",
+	// 	"likes": 69,
+	// 	"userLiked": false
+	// }
+
+
+	handleAddPhoto = (url, name) => {
+		const newPhoto = {
+			"id": this.state.photos.length + 1,
+			"title": name,
+			"url": url,
+			"likes": 13,
+			"userLiked": true
+		}
+		
+		this.setState({
+			photos: [newPhoto, ...this.state.photos]
+		})
+		// this.setState((prevState) => {
+		// 	return{
+		// 		photos: prevState.photos.concat([newPhoto])
+		// 	}
+		
+		// });
+
+	}
+	
 	render(){
-		const photos = data.photos;
 		//console.log(photos);
 		
 		return(
 			<div className="HomePage">
-				<ImageUploaderForm/>
-				<FeedList photos={photos}/>
+				<ImageUploaderForm handleAddPhoto={this.handleAddPhoto}/>
+				<FeedList photos={this.state.photos}/>
 			</div>
 		)
 	}

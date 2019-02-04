@@ -21,17 +21,35 @@
 import React from 'react';
 
 class Likes extends React.Component{
+	constructor(props){
+		super(props);
+		this.state={
+			isLiked: this.props.userLiked,
+			totalLikes: props.likes
+		}
+	}
+
+	handleClick = () => {
+		const isLiked = !this.state.isLiked;
+		this.setState({
+			isLiked: isLiked,
+			totalLikes: isLiked? this.state.totalLikes + 1 : this.state.totalLikes - 1
+		})
+	}
+	
 
 	render(){
-		const {likes} = this.props;
+		const {likes, userLiked} = this.props;
 
 		return(
 			<div className="Likes">
 				<span>
-					<button>
-						Like
+					<button onClick={this.handleClick}>
+						{
+							this.state.isLiked ? "You have liked this photo" : "Like this photo"
+						}
 					</button>
-					<h3>{likes} likes</h3>
+					<h3>{this.state.totalLikes} likes</h3>
 				</span>
 			</div>
 		)
